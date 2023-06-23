@@ -11,13 +11,16 @@
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-	char *arg = strtok(NULL, " \n\t");
+	char *arg = strtok(NULL, " \n\t\r");
+	int n;
 
 	if (!arg || !isdigit(*arg))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+	n = atoi(arg);
+	add_node(stack, n);
 	if (add_node(stack, atoi(arg)) == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
